@@ -6,7 +6,7 @@ multi-task, ~~fore~~ _four_ headed multi-task NLP model that performs **Domain C
 
 Built on `nreimers/MiniLM-L6-H384-uncased` (~22.7M params, ~23MB quantized), targeting deployment on resource-constrained edge devices via ONNX runtime in Rust.
 
-~~fore~~ _for_ anyone dissatisfied with the naming of this project, be grateful that I resisted the plebeian choice to refer to this multi-headed project with something pedestrian as _hydra._ 
+~~fore~~ _for_ anyone dissatisfied with the naming of this project, be grateful that I resisted the plebeian choice to refer to this multi-headed project with something as pedestrian as _hydra._ 
 ## Architecture
 
 A shared MiniLM-L6 encoder feeds into four isolated task heads:
@@ -69,20 +69,6 @@ Each domain generates 500 blocks with this composition:
 - **20% Long-distance (5-7 sentences)** - Coreference span memory stress test
 - **10% Adversarial (1-2 sentences)** - Winograd-style ambiguous pronouns
 - **10% Noisy (1-3 sentences)** - Informal/fragmented text resilience
-
-### Performance (Groq Cloud)
-
-Benchmarked on 2 domains (1,000 blocks):
-
-| Step | Time | Rate |
-|------|------|------|
-| Text Generation | 59s | ~1,000 blocks/min |
-| Entity Extraction | 61s | ~1,000 blocks/min |
-| Tokenization | 0.2s | ~6,400 blocks/sec |
-| Label Mapping | 0.1s | instant |
-| Dep Parsing | 7s | ~140 blocks/sec |
-
-Estimated full build (300 domains): ~5 hours total.
 
 ## Setup
 
