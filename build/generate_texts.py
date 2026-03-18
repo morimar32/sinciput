@@ -26,6 +26,7 @@ from groq import AsyncGroq
 from tqdm.asyncio import tqdm_asyncio
 from tqdm import tqdm
 
+from build.domains import DOMAINS, DOMAIN_IDS, DOMAIN_BY_ID
 from build.models import RawTextBlock
 
 
@@ -82,109 +83,7 @@ DATA_DIR = PROJECT_ROOT / "data"
 RAW_TEXTS_DIR = DATA_DIR / "raw_texts"
 
 
-# ============================================================================
-# Domain Definitions (~300 domains)
-# ============================================================================
-
-DOMAINS = [
-    # Technology & Computing (30)
-    "cloud_computing", "cybersecurity", "machine_learning", "web_development",
-    "mobile_apps", "database_systems", "networking", "devops", "blockchain",
-    "quantum_computing", "edge_computing", "api_design", "microservices",
-    "containerization", "serverless", "data_engineering", "mlops", "iot_devices",
-    "embedded_systems", "computer_vision", "nlp_applications", "robotics",
-    "ar_vr_technology", "game_development", "low_code_platforms", "saas_products",
-    "open_source_software", "version_control", "testing_qa", "technical_documentation",
-
-    # Business & Finance (30)
-    "corporate_finance", "investment_banking", "retail_banking", "insurance",
-    "accounting", "auditing", "tax_planning", "mergers_acquisitions", "venture_capital",
-    "private_equity", "stock_trading", "cryptocurrency_markets", "real_estate_investment",
-    "supply_chain_management", "logistics", "procurement", "hr_management",
-    "talent_acquisition", "employee_benefits", "corporate_strategy", "business_analytics",
-    "market_research", "brand_management", "sales_operations", "customer_success",
-    "business_development", "franchising", "small_business", "startups", "ecommerce",
-
-    # Healthcare & Medicine (30)
-    "general_medicine", "surgery", "pediatrics", "geriatrics", "oncology",
-    "cardiology", "neurology", "psychiatry", "dermatology", "orthopedics",
-    "radiology", "pathology", "pharmacy", "nursing", "emergency_medicine",
-    "public_health", "epidemiology", "clinical_trials", "medical_devices",
-    "telemedicine", "health_informatics", "mental_health", "nutrition",
-    "physical_therapy", "occupational_therapy", "dentistry", "optometry",
-    "veterinary_medicine", "biomedical_research", "genomics",
-
-    # Science & Research (30)
-    "physics", "chemistry", "biology", "astronomy", "geology",
-    "environmental_science", "ecology", "marine_biology", "botany", "zoology",
-    "microbiology", "biochemistry", "genetics", "neuroscience", "psychology",
-    "sociology", "anthropology", "archaeology", "paleontology", "climatology",
-    "meteorology", "oceanography", "materials_science", "nanotechnology",
-    "renewable_energy", "nuclear_science", "space_exploration", "particle_physics",
-    "theoretical_physics", "applied_mathematics",
-
-    # Law & Government (25)
-    "criminal_law", "civil_law", "corporate_law", "intellectual_property",
-    "employment_law", "immigration_law", "environmental_law", "tax_law",
-    "international_law", "constitutional_law", "family_law", "real_estate_law",
-    "litigation", "mediation", "public_policy", "legislation", "regulatory_compliance",
-    "government_administration", "diplomacy", "military_affairs", "intelligence_services",
-    "law_enforcement", "corrections", "judicial_system", "legal_technology",
-
-    # Education (20)
-    "k12_education", "higher_education", "vocational_training", "online_learning",
-    "special_education", "early_childhood", "curriculum_development", "educational_technology",
-    "student_assessment", "academic_research", "library_science", "educational_psychology",
-    "teacher_training", "school_administration", "educational_policy", "stem_education",
-    "arts_education", "language_learning", "adult_education", "tutoring",
-
-    # Arts & Entertainment (25)
-    "film_production", "television", "music_industry", "theater", "visual_arts",
-    "photography", "graphic_design", "animation", "video_games", "publishing",
-    "journalism", "podcasting", "streaming_media", "live_events", "museums",
-    "art_history", "literary_criticism", "music_theory", "dance", "fashion",
-    "interior_design", "architecture", "industrial_design", "advertising", "public_relations",
-
-    # Sports & Recreation (20)
-    "professional_sports", "amateur_athletics", "fitness_training", "sports_medicine",
-    "coaching", "sports_management", "esports", "outdoor_recreation", "camping_hiking",
-    "water_sports", "winter_sports", "martial_arts", "yoga_wellness", "sports_nutrition",
-    "sports_psychology", "sports_journalism", "fantasy_sports", "sports_betting",
-    "stadium_operations", "athletic_equipment",
-
-    # Travel & Hospitality (20)
-    "airlines", "hotels", "cruise_lines", "car_rentals", "travel_agencies",
-    "tourism_boards", "destination_marketing", "event_planning", "restaurants",
-    "catering", "bars_nightlife", "theme_parks", "cultural_tourism", "ecotourism",
-    "adventure_travel", "business_travel", "luxury_travel", "budget_travel",
-    "travel_insurance", "hospitality_technology",
-
-    # Manufacturing & Engineering (25)
-    "automotive_manufacturing", "aerospace", "electronics_manufacturing", "chemical_engineering",
-    "civil_engineering", "mechanical_engineering", "electrical_engineering", "industrial_engineering",
-    "quality_control", "lean_manufacturing", "3d_printing", "cad_design", "process_engineering",
-    "plant_operations", "maintenance_engineering", "safety_engineering", "energy_systems",
-    "hvac_systems", "plumbing", "construction", "mining", "oil_gas", "utilities",
-    "waste_management", "water_treatment",
-
-    # Agriculture & Food (20)
-    "crop_farming", "livestock", "dairy_farming", "organic_farming", "aquaculture",
-    "agricultural_technology", "food_processing", "food_safety", "beverage_industry",
-    "wine_spirits", "food_distribution", "grocery_retail", "restaurant_operations",
-    "food_science", "agricultural_economics", "sustainable_agriculture", "precision_farming",
-    "seed_genetics", "fertilizers_pesticides", "farm_equipment",
-
-    # Personal & Lifestyle (25)
-    "personal_finance", "home_improvement", "gardening", "pet_care", "parenting",
-    "wedding_planning", "dating_relationships", "self_improvement", "time_management",
-    "productivity", "minimalism", "sustainable_living", "home_organization", "cooking",
-    "baking", "wine_appreciation", "coffee_culture", "beauty_cosmetics", "skincare",
-    "hair_care", "mens_grooming", "womens_fashion", "mens_fashion", "jewelry",
-    "collectibles_hobbies",
-]
-
-# Verify we have roughly 300 domains
-assert 280 <= len(DOMAINS) <= 320, f"Expected ~300 domains, got {len(DOMAINS)}"
+# Domain definitions loaded from domains.json (see build/domains.py)
 
 
 # ============================================================================
@@ -460,12 +359,12 @@ def load_completed_domains() -> set[str]:
 async def main(selected_domains: list[str] | None = None):
     # Filter to selected domains if specified
     if selected_domains:
-        domain_list = [(DOMAINS.index(d), d) for d in selected_domains if d in DOMAINS]
-        invalid = [d for d in selected_domains if d not in DOMAINS]
+        domain_list = [DOMAIN_BY_ID[d] for d in selected_domains if d in DOMAIN_BY_ID]
+        invalid = [d for d in selected_domains if d not in DOMAIN_BY_ID]
         if invalid:
             print(f"WARNING: Unknown domains ignored: {invalid}")
     else:
-        domain_list = list(enumerate(DOMAINS))
+        domain_list = list(DOMAINS)
 
     print("=" * 60)
     print("Phase 1, Step 1: Raw Text Generation")
@@ -480,11 +379,11 @@ async def main(selected_domains: list[str] | None = None):
     # Check for already completed domains (resume support)
     completed = load_completed_domains()
     if completed:
-        completed_in_scope = completed & {d for _, d in domain_list}
+        completed_in_scope = completed & {d.id for d in domain_list}
         if completed_in_scope:
             print(f"\nResuming: {len(completed_in_scope)} domains already completed")
 
-    remaining_domains = [(i, d) for i, d in domain_list if d not in completed]
+    remaining_domains = [d for d in domain_list if d.id not in completed]
 
     if not remaining_domains:
         print("\nAll domains complete!")
@@ -496,17 +395,17 @@ async def main(selected_domains: list[str] | None = None):
     all_stats: list[TimingStats] = []
     overall_start = time.perf_counter()
 
-    for domain_index, domain in tqdm(remaining_domains, desc="Domains"):
-        blocks, stats = await generator.generate_domain(domain, domain_index)
+    for domain in tqdm(remaining_domains, desc="Domains"):
+        blocks, stats = await generator.generate_domain(domain.id, domain.index)
         all_stats.append(stats)
 
         if blocks:
-            output_path = save_domain_blocks(domain, blocks)
-            tqdm.write(f"\n{domain}:")
+            output_path = save_domain_blocks(domain.id, blocks)
+            tqdm.write(f"\n{domain.id}:")
             tqdm.write(stats.summary())
             tqdm.write(f"  Saved -> {output_path.name}")
         else:
-            tqdm.write(f"\n  WARNING: No blocks generated for {domain}")
+            tqdm.write(f"\n  WARNING: No blocks generated for {domain.id}")
 
     overall_time = time.perf_counter() - overall_start
 

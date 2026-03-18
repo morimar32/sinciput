@@ -1,0 +1,608 @@
+{
+  "archipelagos": [
+    {
+      "name": "Applied Science",
+      "islands": [
+        {
+          "name": "Agriculture",
+          "domains": [
+            "Aquaculture",
+            "Farming",
+            "Forestry",
+            "Horticulture",
+            "Livestock",
+            "Precision Agriculture",
+            "Viticulture"
+          ]
+        },
+        {
+          "name": "Architecture",
+          "domains": [
+            "Classical Architecture",
+            "Construction",
+            "Interior Design",
+            "Landscape Architecture",
+            "Urban Planning"
+          ]
+        },
+        {
+          "name": "Computer Science",
+          "domains": [
+            "Algorithms",
+            "Artificial Intelligence",
+            "Bioinformatics",
+            "Blockchain",
+            "Cloud Computing",
+            "Computer Graphics",
+            "Cybersecurity",
+            "Data Science",
+            "Databases",
+            "DevOps",
+            "IoT & Embedded Systems",
+            "Networking",
+            "Operating Systems",
+            "Programming Languages",
+            "Quantum Computing",
+            "Software Engineering",
+            "User Experience",
+            "Web Development"
+          ]
+        },
+        {
+          "name": "Engineering",
+          "domains": [
+            "3D Printing",
+            "Aerospace Engineering",
+            "Chemical Engineering",
+            "Civil Engineering",
+            "Electrical Engineering",
+            "Environmental Engineering",
+            "Industrial Engineering",
+            "Materials Science",
+            "Mechanical Engineering",
+            "Renewable Energy",
+            "Robotics"
+          ]
+        },
+        {
+          "name": "Manufacturing",
+          "domains": [
+            "Carpentry",
+            "Carpentry - Furniture Making",
+            "Ceramics",
+            "Factory Production",
+            "Masonry",
+            "Metallurgy",
+            "Mining",
+            "Quality Control",
+            "Textiles"
+          ]
+        },
+        {
+          "name": "Media & Communications",
+          "domains": [
+            "Advertising",
+            "Broadcasting",
+            "Journalism",
+            "Podcasting",
+            "Public Relations",
+            "Publishing",
+            "Social Media",
+            "Streaming Media",
+            "Telephony"
+          ]
+        },
+        {
+          "name": "Medicine",
+          "domains": [
+            "Anatomy",
+            "Anatomy - Cardiovascular Anatomy",
+            "Anatomy - Extremities Anatomy",
+            "Anatomy - Head & Sensory Anatomy",
+            "Anatomy - Musculoskeletal Anatomy",
+            "Anatomy - Neuroanatomy",
+            "Anatomy - Visceral Anatomy",
+            "Bacteriology",
+            "Cardiology",
+            "Dentistry",
+            "Dermatology",
+            "Embryology",
+            "Emergency Medicine",
+            "Epidemiology",
+            "Health & Nutrition",
+            "Immunology",
+            "Neurology",
+            "Nursing",
+            "Obstetrics",
+            "Oncology",
+            "Ophthalmology",
+            "Orthopedics",
+            "Otology",
+            "Pathology",
+            "Pathology - Endocrinology",
+            "Pathology - Hematology",
+            "Pathology - Nephrology",
+            "Pathology - Pulmonology",
+            "Pediatrics",
+            "Pharmacology",
+            "Physical Therapy",
+            "Physiology",
+            "Psychiatry",
+            "Radiology",
+            "Surgery",
+            "Telemedicine",
+            "Toxicology"
+          ]
+        },
+        {
+          "name": "Military",
+          "domains": [
+            "Intelligence",
+            "Military History",
+            "Military Law",
+            "Military Strategy",
+            "Navy",
+            "Terrorism",
+            "Weapons & Ordnance"
+          ]
+        },
+        {
+          "name": "Transportation",
+          "domains": [
+            "Aviation",
+            "Land Transport",
+            "Land Transport - Motor Vehicles",
+            "Land Transport - Rail Transport",
+            "Logistics",
+            "Nautical",
+            "Spaceflight"
+          ]
+        },
+        {
+          "name": "Veterinary Medicine",
+          "domains": [
+            "Veterinary Medicine"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Doctrines",
+      "islands": [
+        {
+          "name": "Ideology",
+          "domains": [
+            "Anarchism",
+            "Conservatism",
+            "Environmentalism",
+            "Feminism",
+            "Liberalism",
+            "Marxism",
+            "Nationalism"
+          ]
+        },
+        {
+          "name": "Mythology",
+          "domains": [
+            "Arthurian Legend",
+            "Celtic Mythology",
+            "Egyptian Mythology",
+            "Folklore",
+            "Greek Mythology",
+            "Mythological Literature",
+            "Norse Mythology",
+            "Roman Mythology"
+          ]
+        },
+        {
+          "name": "Occultism",
+          "domains": [
+            "Alchemy",
+            "Astrology",
+            "Divination",
+            "Hermeticism",
+            "Spiritualism"
+          ]
+        },
+        {
+          "name": "Religion",
+          "domains": [
+            "Buddhism",
+            "Christianity",
+            "Comparative Religion",
+            "Gnosticism",
+            "Hinduism",
+            "Islam",
+            "Judaism",
+            "Religious Practice",
+            "Taoism",
+            "Theology"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Free Time",
+      "islands": [
+        {
+          "name": "Games",
+          "domains": [
+            "Board Games",
+            "Card Games",
+            "Dice Games",
+            "Esports",
+            "Puzzles",
+            "Video Games"
+          ]
+        },
+        {
+          "name": "Gastronomy",
+          "domains": [
+            "Beverages",
+            "Beverages - Winemaking",
+            "Cooking",
+            "Cooking - Baking",
+            "Food Science",
+            "Tasting"
+          ]
+        },
+        {
+          "name": "Hobbies & Crafts",
+          "domains": [
+            "Collecting",
+            "Gardening",
+            "Handicraft",
+            "Handicraft - Needlework",
+            "Handicraft - Woodworking",
+            "Model Building",
+            "Pet Care"
+          ]
+        },
+        {
+          "name": "Sport",
+          "domains": [
+            "Archery & Shooting",
+            "Athletics",
+            "Ball Games",
+            "Combat Sports",
+            "Cycling",
+            "Fishing",
+            "Fitness & Exercise",
+            "Gymnastics",
+            "Horse Racing",
+            "Motorsport",
+            "Mountain Sports",
+            "Racquet Sports",
+            "Water Sports",
+            "Winter Sports"
+          ]
+        },
+        {
+          "name": "Travel & Leisure",
+          "domains": [
+            "Adventure Travel",
+            "Cultural Tourism",
+            "Ecotourism",
+            "Hospitality",
+            "Outdoor Recreation",
+            "Tourism"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Humanities",
+      "islands": [
+        {
+          "name": "Art",
+          "domains": [
+            "Fashion",
+            "Fashion - Accessories",
+            "Fashion - Clothing",
+            "Fashion - Footwear",
+            "Graphic Design",
+            "Medium",
+            "Photography",
+            "Printmaking",
+            "Sculpture",
+            "Visual Arts",
+            "Visual Arts - Art Movements",
+            "Visual Arts - Color Theory",
+            "Visual Arts - Painting"
+          ]
+        },
+        {
+          "name": "History",
+          "domains": [
+            "Ancient History",
+            "Heraldry",
+            "Historiography",
+            "Medieval History",
+            "Modern History",
+            "Social History"
+          ]
+        },
+        {
+          "name": "Linguistics",
+          "domains": [
+            "Grammar",
+            "Grammar - Morphology",
+            "Grammar - Syntax",
+            "Historical Linguistics",
+            "Phonetics",
+            "Semantics",
+            "Sociolinguistics"
+          ]
+        },
+        {
+          "name": "Literature",
+          "domains": [
+            "Literary Criticism",
+            "Non-Fiction",
+            "Novel",
+            "Poetry",
+            "Science Fiction"
+          ]
+        },
+        {
+          "name": "Music",
+          "domains": [
+            "Music Genres",
+            "Music History",
+            "Music Production",
+            "Music Production - Sound Recording",
+            "Music Theory",
+            "Musical Instruments",
+            "Opera",
+            "Singing"
+          ]
+        },
+        {
+          "name": "Performing Arts",
+          "domains": [
+            "Animation",
+            "Cinema",
+            "Cinema - Film & Video Art",
+            "Circus Arts",
+            "Dance",
+            "Stand-Up Comedy",
+            "Theater",
+            "Theater - Drama & Playwriting"
+          ]
+        },
+        {
+          "name": "Philosophy",
+          "domains": [
+            "Aesthetics",
+            "Epistemology",
+            "Ethics",
+            "Existentialism",
+            "Metaphysics",
+            "Philosophy of Mind",
+            "Philosophy of Science",
+            "Political Philosophy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pure Science",
+      "islands": [
+        {
+          "name": "Astronomy",
+          "domains": [
+            "Astrophysics",
+            "Cosmology",
+            "Planetary Science",
+            "Stellar Astronomy"
+          ]
+        },
+        {
+          "name": "Biology",
+          "domains": [
+            "Botany",
+            "Botany - Dendrology",
+            "Botany - Ferns & Bryophytes",
+            "Botany - Flowering Plants",
+            "Botany - Food Crops",
+            "Botany - Grasses & Sedges",
+            "Botany - Herbaceous Plants",
+            "Botany - Mycology",
+            "Botany - Plant Morphology",
+            "Botany - Shrubs & Vines",
+            "Cell Biology",
+            "Cell Biology - Reproductive Biology",
+            "Cell Biology - Taxonomy & Systematics",
+            "Ecology",
+            "Evolutionary Biology",
+            "Genetics",
+            "Marine Biology",
+            "Microbiology",
+            "Paleontology",
+            "Zoology",
+            "Zoology - Entomology",
+            "Zoology - Herpetology",
+            "Zoology - Ichthyology",
+            "Zoology - Invertebrate Zoology",
+            "Zoology - Mammalogy",
+            "Zoology - Ornithology"
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "domains": [
+            "Biochemistry",
+            "Crystallography",
+            "Inorganic Chemistry",
+            "Organic Chemistry",
+            "Organic Chemistry - General Chemistry",
+            "Organic Chemistry - Petroleum & Fuels",
+            "Organic Chemistry - Polymer Chemistry"
+          ]
+        },
+        {
+          "name": "Earth Science",
+          "domains": [
+            "Climatology",
+            "Geology",
+            "Glaciology",
+            "Hydrology",
+            "Meteorology",
+            "Oceanography",
+            "Tectonics",
+            "Volcanology"
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "domains": [
+            "Algebra",
+            "Arithmetic",
+            "Calculus",
+            "Combinatorics",
+            "Geometry",
+            "Logic",
+            "Number Theory",
+            "Numeration Systems",
+            "Statistics",
+            "Topology"
+          ]
+        },
+        {
+          "name": "Physics",
+          "domains": [
+            "Acoustics",
+            "Electromagnetism",
+            "Fluid Dynamics",
+            "Mechanics",
+            "Mechanics - Metrology",
+            "Nuclear Physics",
+            "Optics",
+            "Particle Physics",
+            "Quantum Mechanics",
+            "Relativity",
+            "Thermodynamics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Social Science",
+      "islands": [
+        {
+          "name": "Anthropology",
+          "domains": [
+            "Archaeology",
+            "Cultural Anthropology",
+            "Ethnography",
+            "Physical Anthropology"
+          ]
+        },
+        {
+          "name": "Commerce",
+          "domains": [
+            "Auction",
+            "Business",
+            "E-Commerce",
+            "Entrepreneurship",
+            "Human Resources",
+            "Marketing",
+            "Real Estate",
+            "Retail",
+            "Supply Chain",
+            "Trade"
+          ]
+        },
+        {
+          "name": "Economics",
+          "domains": [
+            "Behavioral Economics",
+            "Development Economics",
+            "Labor Economics",
+            "Macroeconomics",
+            "Microeconomics"
+          ]
+        },
+        {
+          "name": "Education",
+          "domains": [
+            "Academia",
+            "Curriculum Development",
+            "Early Childhood Education",
+            "Educational Technology",
+            "Library Science",
+            "Online Learning",
+            "Pedagogy",
+            "Special Education",
+            "Vocational Training"
+          ]
+        },
+        {
+          "name": "Finance",
+          "domains": [
+            "Accounting",
+            "Auditing",
+            "Banking",
+            "Cryptocurrency",
+            "Insurance",
+            "Investment",
+            "Taxation",
+            "Venture Capital"
+          ]
+        },
+        {
+          "name": "Law",
+          "domains": [
+            "Constitutional Law",
+            "Contract Law",
+            "Corporate Law",
+            "Criminal Law",
+            "Criminal Law - Organized Crime",
+            "Employment Law",
+            "Environmental Law",
+            "Family Law",
+            "Immigration Law",
+            "Intellectual Property",
+            "International Law",
+            "Roman Law"
+          ]
+        },
+        {
+          "name": "Politics",
+          "domains": [
+            "Diplomacy",
+            "Elections",
+            "Governance",
+            "International Relations",
+            "Political Theory",
+            "Public Administration",
+            "Public Policy"
+          ]
+        },
+        {
+          "name": "Psychology",
+          "domains": [
+            "Clinical Psychology",
+            "Cognitive Psychology",
+            "Developmental Psychology",
+            "Neuropsychology",
+            "Psychoanalysis",
+            "Psychophysics",
+            "Social Psychology"
+          ]
+        },
+        {
+          "name": "Sociology",
+          "domains": [
+            "Criminology",
+            "Demography",
+            "Gender Studies",
+            "Media Studies",
+            "Social Stratification",
+            "Urban Sociology"
+          ]
+        }
+      ]
+    }
+  ]
+}
