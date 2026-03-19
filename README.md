@@ -30,13 +30,21 @@ sinciput/
 │   ├── tokenize_blocks.py  # Step 3: WordPiece tokenization (local)
 │   ├── build_labels.py     # Step 4: Map spans to NER labels & coref clusters (local)
 │   └── parse_deps.py       # Step 5: Dependency parsing via spaCy (local)
+├── train/                  # Training infrastructure
+│   ├── train.py            # Multi-task training loop
+│   ├── model.py            # MultiTaskModel (shared encoder + 4 task heads)
+│   ├── dataset.py          # SinciputDataset & collate_fn
+│   └── overfit_test.py     # Sanity check (overfit on small batch)
 ├── data/                   # Generated data (gitignored)
 │   ├── raw_texts/          # Step 1 output: {domain}.jsonl
 │   ├── extracted/          # Step 2 output: {domain}.jsonl
 │   ├── tokenized/          # Step 3 output: {domain}.jsonl
 │   ├── labeled/            # Step 4 output: {domain}.jsonl
 │   └── training/           # Step 5 output: final training examples
-├── train/                  # Training scripts (TODO)
+├── output/                 # Training outputs (gitignored)
+│   ├── checkpoints/        # Per-epoch checkpoints (model + optimizer + scheduler)
+│   ├── runs/               # TensorBoard logs
+│   └── model_final.pt      # Final model weights only (saved on completion)
 ├── PROJ.md                 # Full project specification & training schema
 ├── RESEARCH.md             # Technical deep-dive on model architecture
 └── requirements.txt        # Python dependencies
@@ -104,6 +112,75 @@ PYTHONPATH=. python build/parse_deps.py --domains cloud_computing
 
 Every step has **resume support** - it skips domains that already have output files, so you can safely interrupt and re-run.
 
+## Training
+
+### Training Data
+
+| Stat | Value |
+|------|-------|
+| Total records | 183,859 |
+| Domains | 369 |
+| Blocks per domain | ~500 |
+| Task heads | 4 (domain, NER, parsing, coreference) |
+
+### Model & Optimizations
+
+- **Base encoder**: `nreimers/MiniLM-L6-H384-uncased` (~23.9M params, ~18.6M trainable)
+- **Layer freezing**: Encoder layers 0-2 frozen, layers 3-5 trainable
+- **Differential learning rates**: Encoder 1e-5, task heads 1e-4 to 3e-4
+- **Per-task gradient clipping**: parsing=5.0, all others=1.0
+- **Dynamic padding**: Pad to batch max length, not fixed 512
+- **Vectorized span gather & pairwise scoring** in coreference head (6x speedup)
+
+### Running Training
+
+```bash
+# Start a full 30-epoch run
+python -m train.train --data-dir data/training --epochs 30 --output-dir output
+
+# Run in sessions: train 5 epochs, then stop
+python -m train.train --data-dir data/training --epochs 30 --stop-after 5 --output-dir output
+
+# Resume and run 5 more epochs
+python -m train.train --epochs 30 --stop-after 5 --resume output/checkpoints/checkpoint_epoch5.pt
+
+# Resume and finish remaining epochs
+python -m train.train --epochs 30 --resume output/checkpoints/checkpoint_epoch10.pt
+```
+
+### CLI Reference
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--data-dir` | `data/training` | Training data directory |
+| `--epochs` | `20` | Total number of training epochs |
+| `--stop-after` | _(all)_ | Stop after N epochs this session (checkpoint & resume later) |
+| `--resume` | _(none)_ | Path to checkpoint to resume from |
+| `--output-dir` | `output` | Base output directory |
+| `--checkpoint-dir` | `<output-dir>/checkpoints` | Checkpoint directory |
+| `--log-dir` | `<output-dir>/runs` | TensorBoard log directory |
+| `--base-lr` | `1e-5` | Base learning rate for encoder |
+| `--device` | _(auto)_ | Device: `mps`, `cuda`, `cpu` (auto-detected) |
+| `--fp16` | off | Mixed precision training (CUDA only, falls back to fp32 on MPS) |
+| `--keep-last-n` | `3` | Keep only the last N checkpoints (plus epoch 1) |
+| `--num-workers` | _(auto)_ | DataLoader workers (0 for MPS/CPU, 4 for CUDA) |
+| `--log-interval` | `10` | Log metrics every N steps |
+| `--domains` | _(all)_ | Comma-separated domain filter |
+
+### Output Structure
+
+```
+output/
+├── checkpoints/
+│   ├── checkpoint_epoch1.pt    # ~232MB each (model + optimizer + scheduler)
+│   ├── checkpoint_epoch2.pt
+│   └── ...
+├── runs/                       # TensorBoard logs (tensorboard --logdir output/runs)
+└── model_final.pt              # ~96MB (model weights only, saved on completion)
+```
+
+Checkpoint retention (`--keep-last-n 3`) automatically cleans up old checkpoints, always preserving epoch 1 and the latest 3.
+
 ## Training Data Schema
 
 The final output in `data/training/` matches this structure (see PROJ.md for full spec):
@@ -149,7 +226,8 @@ Key conventions:
 
 ## Status
 
-- [x] Phase 1: Data pipeline (build scripts complete, tested on 2 domains)
-- [ ] Phase 1: Full data generation (300 domains, ~150k blocks)
-- [ ] Phase 2: Model training
+- [x] Phase 1: Data pipeline (build scripts complete)
+- [x] Phase 1: Full data generation (369 domains, 183,859 blocks)
+- [x] Phase 2: Training infrastructure (multi-task loop, checkpointing, resume)
+- [ ] Phase 2: Full training run (30 epochs)
 - [ ] Phase 3: ONNX export & Rust deployment
