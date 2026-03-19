@@ -209,5 +209,9 @@ s/
 
 # Data
 data/
+data-old/
+output/
+train/runs/
+train/checkpoints/
 
 .DS_Store
